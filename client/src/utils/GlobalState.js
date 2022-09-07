@@ -11,6 +11,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     products: [],
     categories: [],
     currentCategory: "",
+    cart: [],
+    cartOpen: false
   });
   // use this to confirm it works!
   console.log(state);
