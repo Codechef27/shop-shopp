@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStoreContext } from '../../utils/GlobalState';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
+import { indexedDb } from '../../utils/helpers';
 
 const CartItem = ({ item }) => {
   
@@ -11,6 +12,7 @@ const CartItem = ({ item }) => {
       type: REMOVE_FROM_CART,
       _id: item._id,
     });
+    indexedDb('cart', 'delete', { ...item });
   };
 
   const onChange = (e) => {
@@ -21,12 +23,16 @@ const CartItem = ({ item }) => {
         type: REMOVE_FROM_CART,
         _id: item._id
       });
+
+      indexedDb('cart', 'delete', { ...item })
     } else {
       dispatch({
         type: UPDATE_CART_QUANTITY,
         _id: item._id,
         purchaseQuantity: parseInt(value)
       });
+
+      indexedDb('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
     }
   };
 
