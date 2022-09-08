@@ -4,15 +4,16 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
-    "@apollo/client": "^3.3.7",
+    "@apollo/client": "^3.6.9",
+    "@stripe/stripe-js": "^1.3.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "graphql": "^14.6.0",
+    "graphql": "^15.8.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "3.4.1"
   },
   "scripts": {
