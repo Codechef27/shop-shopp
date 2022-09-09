@@ -18,11 +18,13 @@
   "author": "",
   "license": "ISC",
   "homepage": "https://github.com/Codechef27/shop-shopp#readme",
-  "devDependencies": {
-    "@reduxjs/toolkit": "^1.6.2",
-    "concurrently": "^5.1.0"
-  },
   "dependencies": {
-    "moongoose": "^0.0.5"
+    "@reduxjs/toolkit": "^1.6.2",
+    "stripe": "^8.179.0"
+  },
+
+  "devDependencies": {
+    "concurrently": "^5.1.0"
   }
+
 }
