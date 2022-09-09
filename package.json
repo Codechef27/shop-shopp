@@ -18,7 +18,11 @@
   "author": "",
   "license": "ISC",
   "homepage": "https://github.com/Codechef27/shop-shopp#readme",
+<<<<<<< HEAD
   "dependencies": {
+=======
+    "dependencies": {
+>>>>>>> 0ce53dcdd26645e773177cc8ad6df144ccae4260
     "@reduxjs/toolkit": "^1.6.2",
     "stripe": "^8.179.0"
   },
