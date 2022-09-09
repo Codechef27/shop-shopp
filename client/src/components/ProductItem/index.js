@@ -8,6 +8,15 @@ import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductItem = (item) => {
+
+  const {
+    image,
+    name,
+    _id,
+    price,
+    quantity
+  } = item;
+  
   const state = useSelector(state => state)
   const dispatch = useDispatch();
   const { cart } = state;
@@ -36,14 +45,6 @@ const ProductItem = (item) => {
       });
     };  
   };
-
-  const {
-    image,
-    name,
-    _id,
-    price,
-    quantity
-  } = item;
 
   return (
     <div className="card px-1 py-1">
