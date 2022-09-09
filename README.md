@@ -14,7 +14,7 @@
 
   ## Link to repo
 
-  -[Visit Rository](https://github.com/Codechef27/shop-shopp)
+  -[Visit Repository](https://github.com/Codechef27/shop-shopp)
 
   ## Table of Contents
 
