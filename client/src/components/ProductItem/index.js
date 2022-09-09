@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { pluralize } from "../../utils/helpers";
-import { useStoreContext } from '../../utils/GlobalState';
-import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
+// import { useStoreContext } from '../../utils/GlobalState';
 import { indexedDb } from '../../utils/helpers'; 
 
-function ProductItem(item) {
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
+import { useDispatch, useSelector } from "react-redux";
 
-  const [state, dispatch] = useStoreContext();
+const ProductItem = (item) => {
+  const state = useSelector(state => state)
+  const dispatch = useDispatch();
   const { cart } = state;
 
   const addToCart = () => {
@@ -20,6 +22,7 @@ function ProductItem(item) {
         _id: _id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
       });
+      
 
       indexedDb('cart', 'put', {
         ...itemInCart,
@@ -29,11 +32,9 @@ function ProductItem(item) {
     } else {
       dispatch({
         type: ADD_TO_CART,
-        product: { ...item, purchaseQuantity: 1 }
+        product: {...item, purchaseQuantity: 1 }
       });
-
-      indexedDb('cart', 'put', { ...item, purchaseQuantity: 1 });
-    }
+    };  
   };
 
   const {

@@ -1,16 +1,20 @@
 import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_CATEGORIES } from '../../utils/queries';
-import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
+
+
 import { indexedDb } from "../../utils/helpers";
+import { useDispatch, useSelector } from "react-redux";
+import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from "../../utils/actions";
+
 
 function CategoryMenu() {
-  // const { data: categoryData } = useQuery(QUERY_CATEGORIES);
+  
   // const categories = categoryData?.categories || [];
-  const [state, dispatch] = useStoreContext();
 
+  const state = useSelector(state => state) 
   const { categories } = state;
+  const dispatch = useDispatch();
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
@@ -21,9 +25,8 @@ function CategoryMenu() {
       //set our state for categories to
       dispatch({
         type: UPDATE_CATEGORIES,
-        categories: categoryData.categories,
+        categories: categoryData.categories
       });
-
       categoryData.categories.forEach(category => {
         indexedDb('categories', 'put', category);
       });
@@ -32,12 +35,12 @@ function CategoryMenu() {
         dispatch({
           type: UPDATE_CATEGORIES,
           categories: categories
-        });
+        })
       });
     }
   }, [categoryData, loading, dispatch]);
 
-  const handleClick = id => {
+  const handleClick = (id) => {
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,
       currentCategory: id

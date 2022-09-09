@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-
 import ProductItem from '../ProductItem';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
-
-import { useStoreContext } from '../../utils/GlobalState';
+// import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { indexedDb } from "../../utils/helpers";
 
-function ProductList() {
-  const [state, dispatch] = useStoreContext();
+import { useSelector, useDispatch } from "react-redux";
 
-  const { currentCategory } = state;
-  
+function ProductList() {
+  const state = useSelector(state => state)
+  const dispatch = useDispatch();
+  const { currentCategory, products } = state;
   const { loading, data } = useQuery(QUERY_PRODUCTS);
   
   useEffect(() => {
@@ -21,9 +20,10 @@ function ProductList() {
     if (data) {
       // let's store it in the global state object
       dispatch({
-        type: UPDATE_PRODUCTS,
-        products: data.products
-      });
+       type: UPDATE_PRODUCTS,
+       products: data.products
+
+      })
   
       // but let's also take each product and save it to IndexedDB using the helper function 
       data.products.forEach((product) => {
@@ -43,16 +43,16 @@ function ProductList() {
   
   function filterProducts() {
     if (!currentCategory) {
-      return state.products;
+      return products;
     }
   
-    return state.products.filter(product => product.category._id === currentCategory);
+    return products.filter(product => product.category._id === currentCategory);
   }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {state.products.length ? (
+      {products.length ? (
         <div className="flex-row">
           {filterProducts().map((product) => (
             <ProductItem
